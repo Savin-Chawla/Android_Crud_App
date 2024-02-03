@@ -21,12 +21,14 @@ public class mydbhandler extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String create = "CREATE TABLE"+params.DB_NAME+"("+ params.KEY_ID + "INTEGER PRIMARY KEY ,"+ params.KEY_NAME +
-        "TEXT, "+ params.KEY_PHONE + "TEXT"+")";
-        Log.d("dbharry", "query running is the : "+create);
-        sqLiteDatabase.execSQL(create);
-    }
+    @Override
+public void onCreate(SQLiteDatabase sqLiteDatabase) {
+    String create = "CREATE TABLE " + params.TABLE_NAME + "(" + params.KEY_ID + " INTEGER PRIMARY KEY, " +
+            params.KEY_NAME + " TEXT, " + params.KEY_PHONE + " TEXT" + ")";
+    Log.d("dbharry", "query running is the : " + create);
+    sqLiteDatabase.execSQL(create);
+}
+
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
@@ -45,7 +47,7 @@ public class mydbhandler extends SQLiteOpenHelper {
     public List<contact> getall_contact(){
         List<contact> contactlist = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        String select = " SELECT * FROM" + params.TABLE_NAME;
+        String select = " SELECT * FROM " + params.TABLE_NAME;
         Cursor cursor = db.rawQuery(select, null);
         if(cursor.moveToFirst()){
             do {
